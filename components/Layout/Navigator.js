@@ -44,7 +44,7 @@ function WebLayout({ router, fullscreen, t, ...props }) {
         //   backgroundColor: "rgba(var(--b3f,250,250,250),1)",
         // }}
       >
-        <Content>
+        <Content style={{overflowY:"auto"}}>
           <Row
             gutter={8}
             style={{

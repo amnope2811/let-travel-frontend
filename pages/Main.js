@@ -46,14 +46,12 @@ function Main(props) {
       />
       <Row gutter={8} style={{height:"100%"}}>
         <Col span={24 }>
-          <div>
             {React.Children.map(props.children, (child) => {
               return React.cloneElement(child, {
                 action: props.action,
                 reducer: props.reducer,
               });
             })}
-          </div>
         </Col>
       </Row>
     </Navigator>

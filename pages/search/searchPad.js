@@ -1,6 +1,7 @@
-import { Input } from "antd";
+import { Input,Typography } from "antd";
 const { Search } = Input;
-export default function ResultPeriod(props) {
+const { Title } = Typography;
+export default function SearchPad(props) {
   const { setSearchValue } = props;
   const { loading_results } = props.reducer.component;
   const onSearch = (e)=>{
@@ -8,7 +9,10 @@ export default function ResultPeriod(props) {
   }
   return (
     <>
-        <Search placeholder="input search text" onSearch={onSearch} style={{ width: 200 }} />
+      <div>
+        <Title level={3}>Find More</Title>
+        <Search placeholder="input search text" onSearch={onSearch} />
+      </div>
     </>
   );
 }
