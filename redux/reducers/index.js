@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
 import component from "./component";
-import lotto from "./lotto";
-import user from "./user";
+import interact from "./interact";
+import example from './example'
 const reducers = combineReducers({
   component,
-  lotto,
-  user,
+  interact,
+  example,
 });
 
 export default reducers;

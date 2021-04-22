@@ -1,29 +1,11 @@
 import stylesheet from "styles/index.less";
+import { api, classes } from "../nredux.config";
+import { useNReduxDispatcher,useNReduxMapping } from "../nredux";
 import { connect } from "react-redux";
 import Head from "next/head";
 import { Row, Col, message } from "antd";
+
 import { Navigator } from "components";
-const mapStateToProps = (state /*, ownProps*/) => {
-  return {
-    reducer: {
-      component: state.component,
-      interact: state.interact,
-      lotto: state.lotto,
-      user: state.user
-    },
-  };
-};
-import actions from "../redux/actions";
-const mapDispatchToProps = (dispatch) => ({
-  action: {
-    interact: (api, doc, item) =>
-      dispatch(actions.interact.call(api, doc, item)),
-    lotto: (api, doc, item, id, props) =>
-      dispatch(actions.lotto.call(api, doc, item, id, props)),
-    user: (api, doc, item, id, props) =>
-      dispatch(actions.user.call(api, doc, item, id, props)),
-  },
-});
 function errorMessage(error) {
   message.error(error);
 }
@@ -50,15 +32,21 @@ function Main(props) {
         <title>React Starter</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="Description" content="Amazon Deepmap" />
+        <link
+          rel="stylesheet"
+          href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+          crossOrigin="anonymous"
+        />
       </Head>
       <style
         dangerouslySetInnerHTML={{
           __html: stylesheet,
         }}
       />
-      <Row gutter={8} style={{height: "100%" }}>
-        <Col span={24}>
-          <div style={{ height:"100%" }}>
+      <Row gutter={8} style={{height:"100%"}}>
+        <Col span={24 }>
+          <div>
             {React.Children.map(props.children, (child) => {
               return React.cloneElement(child, {
                 action: props.action,
@@ -71,4 +59,4 @@ function Main(props) {
     </Navigator>
   );
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(useNReduxMapping, useNReduxDispatcher)(Main);

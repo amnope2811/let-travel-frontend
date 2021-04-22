@@ -1,8 +1,4 @@
-import interact from "./interact";
-import lotto from "./lotto";
-import user from "./user";
+import _super from "./super";
 export default {
-  interact,
-  lotto,
-  user
+  ..._super,
 };

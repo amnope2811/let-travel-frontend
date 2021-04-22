@@ -30,8 +30,7 @@
                     "actions": "./redux/actions",
                     "images": "./public/images",
                     "Colors": "./public/colors/colors.js",
-                    "logics": "./logics",
-                    "styles": "./styles"
+                    "logics": "./logics"
                 }
             }
         ],

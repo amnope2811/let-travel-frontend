@@ -1,12 +1,13 @@
+import { api, classes } from "../../nredux.config";
 //API
 const APIs = ["LIST", "GET", "POST", "PUT", "DEL", "CLEAR"];
 //TYPES
 const TYPE = ["SUCCESS", "FAIL", "LOADING", "COMPLETE"];
 
-const services = ["RESULT"];
+const services = [];
 const interacts = [];
 function createCRUDE(base, is_interact) {
-  return APIs.reduce((acc, type) => {
+  return api.reduce((acc, type) => {
     acc[type] = is_interact ? `${base}_${type}` : createType(`${base}_${type}`);
     return acc;
   }, {});
@@ -23,39 +24,57 @@ const COMPONENT = createType("COMPONENT");
 //STATION
 function createDoc(base, docs, is_interact) {
   return docs.reduce((acc, type) => {
-    acc[type] = createCRUDE(`${base}_${type}`, is_interact);
+    acc[type] = createCRUDE(`${base}_${type.toUpperCase()}`, is_interact);
     return acc;
   }, {});
 }
-function createAPI(base) {
-  return ["LOTTO"].reduce((acc, type) => {
-    acc[type] = createDoc(`${base}_${type}`, services);
-    return acc;
-  }, {});
+function createAPI() {
+  return api.reduce(
+    (c, d) => ({
+      ...c,
+      [d.toUpperCase()]: classes.reduce(
+        (e, f) => ({
+          ...e,
+          [f.toUpperCase()]: APIs.reduce(
+            (g, h) => ({
+              ...g,
+              [h]: TYPE.reduce(
+                (i, j) => ({
+                  ...i,
+                  [j]: `API_${d.toUpperCase()}_${f.toUpperCase()}_${h}_${j}`,
+                }),
+                {}
+              ),
+            }),
+            {}
+          ),
+        }),
+        {}
+      ),
+    }),
+    {}
+  );
 }
 function createInteract(base) {
-  return ["LOTTO"].reduce((acc, type) => {
-    acc[type] = createDoc(`${base}_${type}`, interacts, true);
-    return acc;
-  }, {});
+  return (classes || [])
+    .map((v) => v.toUpperCase())
+    .reduce((acc, type) => {
+      acc[type] = createDoc(`${base}_${type}`, interacts, true);
+      return acc;
+    }, {});
 }
 
-const API = createAPI("API");
+const requests = (api || []).reduce(
+  (a, b) => ({
+    ...a,
+    [`${b.toUpperCase()}_REQUEST`]: `${b.toUpperCase()}_REQUEST`,
+  }),
+  {}
+);
 
+const API = createAPI();
 const INTERACT = createInteract("INTERACT");
 const INTERACT_REQUEST = "INTERACT_REQUEST";
-const LOTTERY_REQUEST = "LOTTERY_REQUEST";
-const LOTTERY_REQUEST_INTERVAL = "LOTTERY_REQUEST_INTERVAL";
-const USER_REQUEST="USER_REQUEST";
-const USER_REQUEST_INTERVAL ="USER_REQUEST_INTERVAL";
-
-export {
-  API,
-  COMPONENT,
-  INTERACT_REQUEST,
-  INTERACT,
-  LOTTERY_REQUEST,
-  LOTTERY_REQUEST_INTERVAL,
-  USER_REQUEST,
-  USER_REQUEST_INTERVAL,
-};
+const types = { ...requests };
+export { API, COMPONENT, INTERACT_REQUEST, INTERACT };
+export default types;

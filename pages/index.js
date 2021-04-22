@@ -11,6 +11,10 @@ export default function Home() {
   );
 }
 
-function ComponentDidMount(props) {
+function ComponentDidMount(props){
+  const { action } = props;
+  React.useEffect(() => {
+    action.example.listTest();
+  }, []);
   return <></>;
 }

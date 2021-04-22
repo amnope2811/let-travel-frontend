@@ -1,11 +1,13 @@
-export default class Super {
+export default class useNReduxReducer {
   doc = "";
   api = "";
+  type = "";
   constructor({ state, action }) {
     this.state = state;
     this.action = action;
     const _request = this.action?.type?.split("_");
     if ((_request || []).length > 0) {
+      this.type = _request[0].toLowerCase();
       if (_request[0] === "API") {
         const index = this.findIndex(_request) - 1;
         this.doc = (_request || []).reduce(
@@ -13,6 +15,11 @@ export default class Super {
           ""
         );
         this.api = _request[index];
+      } else if (_request[0] === "INTERACT") {
+        if (_request[2] && _request[3]) {
+          this.doc = _request[2];
+          this.api = _request[3];
+        }
       }
     }
   }
@@ -25,25 +32,29 @@ export default class Super {
     const _clear = word.indexOf("CLEAR") + 1;
     return _get || _list || _post || _put || _del || _clear;
   }
-  observe() {
+  observe(_state) {
     const { doc, api } = this;
     const data = doc.toLowerCase();
     const list = `${data}s`;
-    switch (api) {
-      case "GET":
-        return this.get(data);
-      case "LIST":
-        return this.list(list);
-      case "CLEAR":
-        return this.clear(list, data);
-      case "POST":
-        return this.post(list, data);
-      case "PUT":
-        return this.put(list, data);
-      case "DELETE":
-        return this.delete(list);
-      default:
-        return { ...this.state };
+    if (this.type === _state) {
+      switch (api) {
+        case "GET":
+          return this.get(data);
+        case "LIST":
+          return this.list(list);
+        case "CLEAR":
+          return this.clear(list, data);
+        case "POST":
+          return this.post(list, data);
+        case "PUT":
+          return this.put(list, data);
+        case "DELETE":
+          return this.delete(list);
+        default:
+          return { ...this.state };
+      }
+    } else {
+      return { ...this.state };
     }
   }
   get(key = "data") {
@@ -67,7 +78,7 @@ export default class Super {
   clear(key = "list", data = "data") {
     let record = this.state;
     record[key] = [];
-    record[data] = {};
+    record[data] = null;
     return { ...record };
   }
   post(list = "list", key = "data") {

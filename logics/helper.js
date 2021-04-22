@@ -1,3 +1,5 @@
+import { classes } from "../nredux.config";
+import actions from "actions";
 Number.prototype.format = function (n, x) {
   const re = "\\d(?=(\\d{" + (x || 3) + "})+" + (n > 0 ? "\\." : "$") + ")";
   return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, "g"), "$&,");
@@ -44,6 +46,4 @@ Array.prototype.unique = function () {
 function toSorter(a, b) {
   return a.localeCompare(b);
 }
-export default {
-  dateFormat: "DD-MM-YYYY",
-};
+
