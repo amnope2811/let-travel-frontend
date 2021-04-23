@@ -29,7 +29,7 @@ const initialState = {
       tag:"Full",
       img:'https://www.planetware.com/photos-large/THA/wat-arun.jpg',
       location:"Arun Amarin Road, Bangkok",
-      rating:"4.5",
+      rating:"3.5",
       fullPrize:400,
       currentPrize:400
     }

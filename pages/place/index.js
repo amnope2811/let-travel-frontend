@@ -19,7 +19,6 @@ function ComponentDidMount({ action, reducer}) {
 function MainComponent(props) {
     const router = useRouter()
     let data = (props?.reducer?.interact?.placeList||[]).find(v=>v.id==router?.query?.id);
-    console.log(props);
     props.setData(data);
   return (
     <>

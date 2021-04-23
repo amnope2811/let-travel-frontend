@@ -22,7 +22,7 @@ export default function SearchPad(props) {
                 lineHeight: '32px',
             }}
         >
-            <Button onClick={onLoadMore}>loading more</Button>
+            <Button type="primary" onClick={onLoadMore}>loading more</Button>
         </div>
     )
     let clickList=(e)=>{
