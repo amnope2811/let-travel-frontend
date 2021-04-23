@@ -4,10 +4,7 @@ const { Search } = Input;
 const { Text } = Typography;
 const Item = List.Item;
 const Meta = Item.Meta;
-const mock = [
-    {id:'01',title:'testtt',description:'1234',tag:"Remain 2 Seats"},
-    {id:'02',title:'testtt',description:'1234',tag:"Full"},
-]
+import Router from "next/router";
 export default function SearchPad(props) {
     const [loading, setLoading] = React.useState();
     let onLoadMore =()=>{
@@ -29,6 +26,8 @@ export default function SearchPad(props) {
         </div>
     )
     let clickList=(e)=>{
+      props.action.interact.postPlace({item:e})
+      Router.push(`/place?id=${e.id}`)
         console.log(e)
     }
   return (
@@ -37,12 +36,12 @@ export default function SearchPad(props) {
         style={{margin:"6px 0"}}
         itemLayout="horizontal"
         loadMore={loadMore}
-        dataSource={mock}
+        dataSource={props?.reducer?.interact?.placeList}
         renderItem={item => (
           <Item key={item.id} style={{cursor:"pointer",padding:"16px"}} onClick={()=>clickList(item)}>
             <Skeleton avatar title={false} loading={loading} active>
               <Meta
-                title={<a href="https://ant.design">{item.title}</a>}
+                title={item.title}
                 description={item.description}
               />
               <div><Text code>{item.tag}</Text></div>

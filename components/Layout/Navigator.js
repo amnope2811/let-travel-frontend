@@ -36,7 +36,7 @@ function WebLayout({ router, fullscreen, t, ...props }) {
           defaultSelectedKeys={[path]}
         >
           <Menu.Item key="/"><HomeOutlined /></Menu.Item>
-          <Menu.Item key="/search">ค้นหา</Menu.Item>
+          <Menu.Item key="/search">Explore</Menu.Item>
         </Menu>
       </Header>
       <Layout
@@ -44,7 +44,7 @@ function WebLayout({ router, fullscreen, t, ...props }) {
         //   backgroundColor: "rgba(var(--b3f,250,250,250),1)",
         // }}
       >
-        <Content style={{overflowY:"auto"}}>
+        <Content style={{overflowY:"auto",overflowX:"hidden"}}>
           <Row
             gutter={8}
             style={{
