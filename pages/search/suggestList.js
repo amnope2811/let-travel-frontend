@@ -4,7 +4,6 @@ import photo2 from 'images/img2.png';
 import photo3 from 'images/img3.png';
 import photo4 from 'images/img4.png';
 import photo5 from 'images/img5.jpg';
-const { Search } = Input;
 const { Text } = Typography;
 const {Meta} = Card;
 const mock = [photo1,photo2,photo3,photo4,photo5];
@@ -13,14 +12,12 @@ const contentStyle = {
     color: 'black',
     lineHeight: '160px',
     textAlign: 'center',
-    backgroundColor:"#f7b6b6"
-  }
+    backgroundColor:"#00af91"
+}
 export default function SearchList(props) {
   return (
     <>
         <div style={{margin:"24px"}}>
-            
-
             <Row gutter={36} style={{margin:"8px"}}>
                 <Col span={12}>
                     <Text style={{fontSize:"20px"}}>Most popular</Text>

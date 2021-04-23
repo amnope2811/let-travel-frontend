@@ -22,9 +22,11 @@ function MainComponent(props) {
     props.setData(data);
   return (
     <>
-      <div className="set-image-background" style={{backgroundImage:`url(${data.img}) !important`}}>
-        <PlaceDetail {...props}/>
-      </div>
+      {data&&(
+        <div className="set-image-background" style={{backgroundImage:`url(${data.img}) !important`}}>
+          <PlaceDetail {...props}/>
+        </div>
+      )}
     </>
   );
 }

@@ -24,7 +24,7 @@ export default function PageDetail(props) {
       rating =[...rating,'empty'];
     }
   }
-  console.log(rating)
+  console.log(props.action)
   return (
     <>
       {data&&(
