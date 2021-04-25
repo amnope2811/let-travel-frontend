@@ -39,11 +39,7 @@ function WebLayout({ router, fullscreen, t, ...props }) {
           <Menu.Item key="/search">Explore</Menu.Item>
         </Menu>
       </Header>
-      <Layout
-        // style={{
-        //   backgroundColor: "rgba(var(--b3f,250,250,250),1)",
-        // }}
-      >
+      <Layout>
         <Content style={{overflowY:"auto",overflowX:"hidden"}}>
           <Row
             gutter={8}

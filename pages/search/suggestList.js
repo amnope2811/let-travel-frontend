@@ -18,8 +18,8 @@ export default function SearchList(props) {
   return (
     <>
         <div style={{margin:"24px"}}>
-            <Row gutter={36} style={{margin:"8px"}}>
-                <Col span={12}>
+            <Row gutter={{ sm:0, md: 36}} style={{margin:"8px"}}>
+                <Col md={12} sm={24}>
                     <Text style={{fontSize:"20px"}}>Most popular</Text>
                     <Carousel effect="fade" autoplay>
                         {(mock||[]).map(v=>{
@@ -36,7 +36,7 @@ export default function SearchList(props) {
                         })}
                     </Carousel>
                 </Col>
-                <Col span={12}>
+                <Col md={12} sm={24}>
                     <Text style={{fontSize:"20px"}}>Suggest for you</Text>
                     <Carousel effect="fade" autoplay>
                         {(mock||[]).map((v,i)=>{

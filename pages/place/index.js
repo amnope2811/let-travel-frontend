@@ -1,14 +1,17 @@
 import React from "react";
 import Main from "../Main";
 import PlaceDetail from "./detail";
-import { useRouter } from 'next/router'
+import ReserveModal from "./reserveModal";
+import { useRouter } from 'next/router';
 
 export default function PlacePage(props) {
   const [data, setData] = React.useState();
+  const [isRenderModal, setIsRenderModal] = React.useState(false);
+  let state ={data,setData,isRenderModal,setIsRenderModal};
   return (
     <Main>
       <ComponentDidMount/>
-      <MainComponent setData={setData} data={data}/>
+      <MainComponent {...state}/>
     </Main>
   );
 }
@@ -25,6 +28,7 @@ function MainComponent(props) {
       {data&&(
         <div className="set-image-background" style={{backgroundImage:`url(${data.img}) !important`}}>
           <PlaceDetail {...props}/>
+          <ReserveModal {...props}/>
         </div>
       )}
     </>

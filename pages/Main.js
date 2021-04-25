@@ -29,7 +29,7 @@ function Main(props) {
   return (
     <Navigator fullscreen={fullscreen} noLayout={noLayout}>
       <Head>
-        <title>React Starter</title>
+        <title>Let's Travel</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="Description" content="Amazon Deepmap" />
         <link

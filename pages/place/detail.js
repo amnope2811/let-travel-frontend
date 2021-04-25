@@ -3,12 +3,12 @@ import { EnvironmentOutlined, StarOutlined, StarFilled, StarTwoTone } from "@ant
 const { Search } = Input;
 const { Title,Text,Link  } = Typography;
 let styles={
-  prize: {position:'absolute',right:'7%',fontWeight:'bold'},
+  price: {position:'absolute',right:'7%',fontWeight:'bold'},
   card:{ backgroundColor:'#ffecec80',borderColor:'transparent'},
   location:{ color:'coral',padding:'6px' },
   rating:{ color:'#ffc800',padding:'1px'},
-  currentPrize:{fontSize:'20px',padding:'4px',color:'mediumspringgreen'},
-  fullPrize:{textDecoration:'line-through',fontSize:'16px',padding:'4px',color:'darkorange'},
+  currentprice:{fontSize:'20px',padding:'4px',color:'mediumspringgreen'},
+  fullprice:{textDecoration:'line-through',fontSize:'16px',padding:'4px',color:'darkorange'},
   description:{margin:'18px 0'}
 }
 
@@ -24,14 +24,16 @@ export default function PageDetail(props) {
       rating =[...rating,'empty'];
     }
   }
-  console.log(props.action)
+  let onClickBook=()=>{
+    props.setIsRenderModal(true);
+  }
   return (
     <>
       {data&&(
         <Card style={styles.card}>
-          <div style={styles.prize}>
-            <Text style={styles.currentPrize}>{`฿ ${data.currentPrize}`}</Text>
-            {data.currentPrize!=data.fullPrize ? <Text style={styles.fullPrize}>{data.fullPrize}</Text>:null}
+          <div style={styles.price}>
+            <Text style={styles.currentprice}>{`฿ ${data.currentprice}`}</Text>
+            {data.currentprice!=data.fullprice ? <Text style={styles.fullprice}>{data.fullprice}</Text>:null}
           </div>
           <Title level={3}>{data.title}</Title>
           <div>
@@ -59,7 +61,7 @@ export default function PageDetail(props) {
           </div>
 
           <div style={{textAlign:'center'}}>
-            <Button type="primary">Book now</Button>
+            <Button type="primary" onClick={onClickBook}>Book now</Button>
           </div>
           
         </Card>

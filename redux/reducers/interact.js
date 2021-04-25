@@ -8,8 +8,8 @@ const initialState = {
       img:"https://www.planetware.com/photos-large/THA/grand-palace.jpg",
       location:"Na Phra Lan Road, Phra Borom Maha Ratchawang, Phra Nakhon",
       rating:"5",
-      fullPrize:500,
-      currentPrize:300
+      fullprice:500,
+      currentprice:300
     },
     {
       id:'02',
@@ -19,8 +19,8 @@ const initialState = {
       img:'https://www.planetware.com/photos-large/THA/thailand-bangkok-wat-pho.jpg',
       location:"2 Sanamchai Road, Grand Palace Subdistrict, Pranakorn District",
       rating:"5",
-      fullPrize:400,
-      currentPrize:300
+      fullprice:400,
+      currentprice:300
     },
     {
       id:'03',
@@ -30,8 +30,8 @@ const initialState = {
       img:'https://www.planetware.com/photos-large/THA/wat-arun.jpg',
       location:"Arun Amarin Road, Bangkok",
       rating:"3.5",
-      fullPrize:400,
-      currentPrize:400
+      fullprice:400,
+      currentprice:400
     }
   ]
 };
