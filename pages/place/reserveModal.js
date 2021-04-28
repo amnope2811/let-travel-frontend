@@ -77,7 +77,7 @@ export default function ReserveModal(props) {
               name={['code']} 
               label="Promotion Code"
             >
-              <Input size="large" style={{width:'150px'}}/>
+              <Input size="large" style={{width:'160px'}} placeholder="Enter Promo Code"/>
             </Form.Item>
           </Form>
         </Modal>
