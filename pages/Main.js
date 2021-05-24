@@ -16,6 +16,8 @@ function successMessage() {
 function Main(props) {
   const { fullscreen, loadMap, noLayout } = props;
   const { error, success } = props.reducer.component;
+  
+ 
   React.useEffect(() => {
     if (error) {
       errorMessage(error);
@@ -27,7 +29,7 @@ function Main(props) {
     }
   }, [success]);
   return (
-    <Navigator fullscreen={fullscreen} noLayout={noLayout}>
+    <Navigator fullscreen={fullscreen} noLayout={noLayout} {...props}>
       <Head>
         <title>Let's Travel</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />

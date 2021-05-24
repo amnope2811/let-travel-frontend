@@ -30,14 +30,29 @@ function WebLayout({ router, fullscreen, t, ...props }) {
   return (
     <Layout  style={{ height: "100vh",overflowY: "hidden" }}>
       <Header>
-        <Menu
-          onClick={_on_click_menu}
-          mode="horizontal"
-          defaultSelectedKeys={[path]}
-        >
-          <Menu.Item key="/"><HomeOutlined /></Menu.Item>
-          <Menu.Item key="/search">Explore</Menu.Item>
-        </Menu>
+        <Row gutter="16">
+          <Col span={20}>
+            <Menu
+              onClick={_on_click_menu}
+              mode="horizontal"
+              defaultSelectedKeys={[path]}
+            >
+              <Menu.Item key="/"><HomeOutlined /></Menu.Item>
+              <Menu.Item key="/search">Explore</Menu.Item>
+            </Menu>
+          </Col>
+          <Col span={4}>
+            <Menu
+              onClick={_on_click_menu}
+              mode="horizontal"
+              defaultSelectedKeys={[path]}
+              style={{textAlign:'end'}}
+            >
+              <Menu.Item key="/signin">Sign in</Menu.Item>
+            </Menu>
+          </Col>
+        </Row>
+        
       </Header>
       <Layout>
         <Content style={{overflowY:"auto",overflowX:"hidden"}}>

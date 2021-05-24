@@ -1,12 +1,7 @@
 import React from "react";
 import { Input,Typography,Button,Modal,DatePicker,Form,InputNumber } from "antd";
 import moment from 'moment';
-const { Search } = Input;
-const { Title,Text,Link  } = Typography;
-const {RangePicker } = DatePicker;
-let styles={
-  
-}
+
 const layout = {
   labelCol: {
     span: 8,
@@ -25,17 +20,30 @@ const validateMessages = {
     range: '${label} must be between ${min} and ${max}',
   },
 };
+const initValue ={
+  number:1,
+  date:moment((new Date()).setHours(0,0,0))
+}
 
 export default function ReserveModal(props) {
-  let {data,reducer} = props;
-  let onConfirm =()=>{
-    props.setIsRenderModal(false);
-  }
-  let onCancel =()=>{
-    props.setIsRenderModal(false);
-  }
-  let onFinish =()=>{
+  const {data,reducer} = props;
+  const [form] = Form.useForm();
+  
 
+  const onConfirm =()=>{
+    form.submit();
+  }
+
+  const onCancel =()=>{
+    props.setIsRenderModal(false);
+  }
+
+  const onFinish =()=>{
+    console.log('testtt');
+    form.validateFields().then(v=>{
+      console.log(v);
+      props.setIsRenderModal(false);
+    })
   }
   return (
     <>
@@ -54,18 +62,25 @@ export default function ReserveModal(props) {
             </Button>,
           ]}
         >
-          <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+          <Form 
+            {...layout} 
+            form={form} 
+            name="nest-messages" 
+            onFinish={onFinish} 
+            validateMessages={validateMessages}
+            initialValues={initValue}
+          >
             <Form.Item 
               name={['number']} 
               label="Number of Tickers" 
-              rules={[{ required: true }]}
+              rules={[{ required: true, message: 'Please fill number of tickets' }]}
             >
               <InputNumber size="large" min={1} max={10} defaultValue={1}/>
             </Form.Item>
             <Form.Item 
               name={['date']} 
               label="Date"
-              rules={[{ required: true }]}
+              rules={[{ required: true, message: 'Please fill reservation date'  }]}
             >
               <DatePicker
                 size="large"

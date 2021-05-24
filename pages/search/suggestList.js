@@ -8,7 +8,7 @@ const { Text } = Typography;
 const {Meta} = Card;
 const mock = [photo1,photo2,photo3,photo4,photo5];
 const contentStyle = {
-    height: '365px',
+    height: '405px',
     color: 'black',
     lineHeight: '160px',
     textAlign: 'center',
@@ -26,7 +26,7 @@ export default function SearchList(props) {
                             return <>
                                 <div style={contentStyle}>
                                     <Card
-                                        cover={<img alt="example" height="220px" src={v}/>}
+                                        cover={<img alt="example" height="260px" src={v}/>}
                                         style={{borderShadow:"none",borderRadius:"unset"}}
                                     >
                                         <Meta title="Europe Street beat" description="www.instagram.com" />
@@ -43,7 +43,7 @@ export default function SearchList(props) {
                             return <>
                                 <div style={contentStyle}>
                                     <Card
-                                        cover={<img alt="example" height="220px" src={mock[mock.length-i-1]}/>}
+                                        cover={<img alt="example" height="260px" src={mock[mock.length-i-1]}/>}
                                         style={{borderShadow:"none",borderRadius:"unset"}}
                                     >
                                         <Meta title="Europe Street beat" description="www.instagram.com" />

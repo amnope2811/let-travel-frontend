@@ -1,4 +1,4 @@
 module.exports = {
-  api: ["example"],
-  classes: ["test","place"],
+  api: ["example","api"],
+  classes: ["place","auth-signup"],
 };

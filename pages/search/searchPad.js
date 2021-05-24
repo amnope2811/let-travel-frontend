@@ -5,7 +5,7 @@ export default function SearchPad(props) {
   const { setSearchValue } = props;
   const { loading_results } = props.reducer.component;
   const onSearch = (e)=>{
-      console.log(e)
+      setSearchValue(e);
   }
   return (
     <>

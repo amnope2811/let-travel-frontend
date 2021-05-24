@@ -1,7 +1,9 @@
 import { INTERACT_REQUEST, INTERACT, COMPONENT } from "../actions/type";
 import { put, fork, call, take, takeEvery, throttle } from "redux-saga/effects";
 import _ from "./super";
+console.log(1);
 const { useInternalSaga ,error} = _;
+console.log(2);
 function* request(actions) {
   try {
     switch (actions.api) {
@@ -59,6 +61,7 @@ function* get(actions) {
 function* post(actions) {
   const { doc, item, props, service } = actions;
   try {
+    console.log(actions);
     switch (actions.doc) {
       default:
         return yield call(useInternalSaga, {

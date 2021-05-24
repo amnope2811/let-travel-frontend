@@ -5,7 +5,7 @@ const { Title,Text,Link  } = Typography;
 let styles={
   price: {position:'absolute',right:'7%',fontWeight:'bold'},
   card:{ backgroundColor:'#ffecec80',borderColor:'transparent'},
-  location:{ color:'coral',padding:'6px' },
+  location:{ color:'#ff4a08',padding:'6px' },
   rating:{ color:'#ffc800',padding:'1px'},
   currentprice:{fontSize:'20px',padding:'4px',color:'mediumspringgreen'},
   fullprice:{textDecoration:'line-through',fontSize:'16px',padding:'4px',color:'darkorange'},

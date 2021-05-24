@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import Main from "../Main";
 import PlaceDetail from "./detail";
 import ReserveModal from "./reserveModal";
@@ -20,13 +20,18 @@ function ComponentDidMount({ action, reducer}) {
   return <></>;
 }
 function MainComponent(props) {
-    const router = useRouter()
-    let data = (props?.reducer?.interact?.placeList||[]).find(v=>v.id==router?.query?.id);
+  const router = useRouter()
+
+  useEffect(() =>{
+    const data = (props?.reducer?.interact?.placeList||[]).find(v=>v.id==router?.query?.id);
     props.setData(data);
+  })
+    
+  let data = (props?.reducer?.interact?.placeList||[]).find(v=>v.id==router?.query?.id);
   return (
     <>
       {data&&(
-        <div className="set-image-background" style={{backgroundImage:`url(${data.img}) !important`}}>
+        <div className="set-image-background" style={{backgroundImage:`url(${data.img})`}}>
           <PlaceDetail {...props}/>
           <ReserveModal {...props}/>
         </div>
