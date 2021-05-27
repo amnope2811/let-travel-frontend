@@ -12,7 +12,8 @@ export default function Home() {
 }
 
 function ComponentDidMount(props){
-  const { action } = props;
+  const { action,reducer } = props;
+  
   React.useEffect(() => {
     
   }, []);

@@ -26,7 +26,7 @@ const initValue ={
 }
 
 export default function ReserveModal(props) {
-  const {data,reducer} = props;
+  const {reducer,data} = props;
   const [form] = Form.useForm();
   
 

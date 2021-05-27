@@ -2,7 +2,7 @@ import React,{useEffect} from "react";
 import Main from "../Main";
 import PlaceDetail from "./detail";
 import ReserveModal from "./reserveModal";
-import { useRouter } from 'next/router';
+import Router from 'next/router';
 
 export default function PlacePage(props) {
   const [data, setData] = React.useState();
@@ -20,18 +20,22 @@ function ComponentDidMount({ action, reducer}) {
   return <></>;
 }
 function MainComponent(props) {
-  const router = useRouter()
+  let data = props?.reducer?.interact?.place?.item;
+  
+  useEffect(()=>{
+    if(data==null){
+      Router.push('/search');
+    }
+  },[])
 
-  useEffect(() =>{
-    const data = (props?.reducer?.interact?.placeList||[]).find(v=>v.id==router?.query?.id);
+  useEffect(()=>{
     props.setData(data);
-  })
-    
-  let data = (props?.reducer?.interact?.placeList||[]).find(v=>v.id==router?.query?.id);
+  },[data])
+  // let data = (props?.reducer?.interact?.placeList||[]).find(v=>v.id==router?.query?.id);
   return (
     <>
       {data&&(
-        <div className="set-image-background" style={{backgroundImage:`url(${data.img})`}}>
+        <div className="set-image-background" style={{backgroundImage:`url(${process.env.BACKEND_URI}${data.img?.imagePath})`}}>
           <PlaceDetail {...props}/>
           <ReserveModal {...props}/>
         </div>

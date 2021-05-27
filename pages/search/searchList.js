@@ -5,8 +5,12 @@ const { Text } = Typography;
 const Item = List.Item;
 const Meta = Item.Meta;
 import Router from "next/router";
+
 export default function SearchPad(props) {
     const [loading, setLoading] = React.useState();
+    const {reducer,action} = props;
+    const placeList = reducer?.api?.places||[];
+
     let onLoadMore =()=>{
         setLoading(true);
         setTimeout(()=>{
@@ -26,9 +30,9 @@ export default function SearchPad(props) {
         </div>
     )
     let clickList=(e)=>{
-      props.action.interact.postPlace({item:e})
-      Router.push(`/place?id=${e.id}`)
-        console.log(e)
+      props.action.interact.clearPlace();
+      props.action.interact.postPlace({item:e});
+      Router.push(`/place`);
     }
   return (
     <>
@@ -36,9 +40,9 @@ export default function SearchPad(props) {
         style={{margin:"6px 0"}}
         itemLayout="horizontal"
         loadMore={loadMore}
-        dataSource={props?.reducer?.interact?.placeList}
+        dataSource={placeList}
         renderItem={item => (
-          <Item key={item.id} style={{cursor:"pointer",padding:"16px"}} onClick={()=>clickList(item)}>
+          <Item key={item.id} style={{cursor:"pointer",padding:"26px"}} onClick={()=>clickList(item)}>
             <Skeleton avatar title={false} loading={loading} active>
               <Meta
                 title={item.title}

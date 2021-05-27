@@ -24,7 +24,7 @@ export default function SearchList(props) {
                     <Carousel effect="fade" autoplay>
                         {(mock||[]).map(v=>{
                             return <>
-                                <div style={contentStyle}>
+                                <div style={contentStyle} key={`1${v}`}>
                                     <Card
                                         cover={<img alt="example" height="260px" src={v}/>}
                                         style={{borderShadow:"none",borderRadius:"unset"}}
@@ -41,7 +41,7 @@ export default function SearchList(props) {
                     <Carousel effect="fade" autoplay>
                         {(mock||[]).map((v,i)=>{
                             return <>
-                                <div style={contentStyle}>
+                                <div style={contentStyle} key={`2${v}`}>
                                     <Card
                                         cover={<img alt="example" height="260px" src={mock[mock.length-i-1]}/>}
                                         style={{borderShadow:"none",borderRadius:"unset"}}

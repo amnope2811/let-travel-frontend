@@ -28,12 +28,17 @@ function Main(props) {
       successMessage();
     }
   }, [success]);
+  React.useEffect(() => {
+    if(props.reducer?.api.me==null){
+      props.action?.api?.getMe();
+    }
+  }, []);
   return (
     <Navigator fullscreen={fullscreen} noLayout={noLayout} {...props}>
       <Head>
         <title>Let's Travel</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="Description" content="Amazon Deepmap" />
+        <meta name="Description" content="Let travel" />
         <link
           rel="stylesheet"
           href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"

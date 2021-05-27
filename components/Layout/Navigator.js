@@ -22,6 +22,15 @@ function WebLayout({ router, fullscreen, t, ...props }) {
   const _on_click_menu = (e) => {
     Router.push(e.key);
   };
+
+  const _on_click_user=(e)=>{
+    console.log(e);
+    switch (e.key){
+      case 'signout':
+        props?.action?.interact.postSignout();
+        break;
+    }
+  }
   React.useEffect(() => {
     if (router.asPath !== "/") {
       Router.push(router.asPath);
@@ -42,13 +51,16 @@ function WebLayout({ router, fullscreen, t, ...props }) {
             </Menu>
           </Col>
           <Col span={4}>
+            
             <Menu
-              onClick={_on_click_menu}
+              onClick={_on_click_user}
               mode="horizontal"
               defaultSelectedKeys={[path]}
               style={{textAlign:'end'}}
             >
-              <Menu.Item key="/signin">Sign in</Menu.Item>
+              <SubMenu key="sub1" icon={<Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>U</Avatar>}>
+                <Menu.Item key="signout">Sign out</Menu.Item>
+              </SubMenu>
             </Menu>
           </Col>
         </Row>

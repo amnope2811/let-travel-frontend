@@ -1,9 +1,7 @@
 import { INTERACT_REQUEST, INTERACT, COMPONENT } from "../actions/type";
 import { put, fork, call, take, takeEvery, throttle } from "redux-saga/effects";
 import _ from "./super";
-console.log(1);
 const { useInternalSaga ,error} = _;
-console.log(2);
 function* request(actions) {
   try {
     switch (actions.api) {
@@ -43,6 +41,16 @@ function* get(actions) {
   const { doc, item, id, props, service } = actions;
   try {
     switch (actions.doc) {
+      case 'REMEMBER':
+        let remember =JSON.parse(localStorage.getItem("r"));
+        if(remember){
+          
+          console.log(remember,typeof window.atob(remember));
+          remember = JSON.parse(window.atob(remember));
+          remember.username = window.atob(remember.username);
+          remember.password = window.atob(remember.password);
+        }
+        return yield call(useInternalSaga, {api: "GET",doc,"item":remember,id,props,service});
       default:
         return yield call(useInternalSaga, {
           api: "GET",
@@ -61,8 +69,13 @@ function* get(actions) {
 function* post(actions) {
   const { doc, item, props, service } = actions;
   try {
-    console.log(actions);
     switch (actions.doc) {
+      case 'SIGNOUT':
+        localStorage.removeItem("token");
+        localStorage.removeItem("u");
+        yield call(clear, {doc,item,props,service});
+        location.reload();
+        return ;
       default:
         return yield call(useInternalSaga, {
           api: "POST",
@@ -81,6 +94,12 @@ function* change(actions) {
   const { doc, item, props, id, service } = actions;
   try {
     switch (actions.doc) {
+      case 'REMEMBER':
+        let user = Object.assign({}, item);;
+        user.username = window.btoa(user.username);
+        user.password = window.btoa(user.password);
+        user = window.btoa(JSON.stringify(user));
+        localStorage.setItem("r", JSON.stringify(user));
       default:
         return yield call(useInternalSaga, {
           api: "PUT",
@@ -99,6 +118,8 @@ function* del(actions) {
   const { doc, id, service } = actions;
   try {
     switch (actions.doc) {
+      case 'REMEMBER':
+        localStorage.removeItem("r");
       default:
         return yield call(useInternalSaga, { api: "DEL", doc, id, service });
     }

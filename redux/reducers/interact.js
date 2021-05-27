@@ -38,8 +38,6 @@ const initialState = {
 import useNReduxReducer from "./super";
 export default function interact(state = initialState, action) {
   const reducer = new useNReduxReducer({ state, action });
-  
-  console.log(action,reducer);
   switch (action.type) {
     default:
       return reducer.observe("interact");

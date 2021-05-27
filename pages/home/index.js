@@ -21,7 +21,9 @@ function MainComponent() {
     <>
         <div className="home-background" style={{height:"100%"}}>
             <div style={{position:"absolute",width:"100%",bottom:"25px",textAlign:"center" }}>
-                <Title level={5} onClick={route} style={{color:"white",cursor:"pointer"}}>Get Started</Title>
+                <Title level={5} onClick={route} style={{color:"white",cursor:"pointer"}}>
+                  Get Started
+                </Title>
             </div>
         </div>
     </>

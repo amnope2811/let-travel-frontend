@@ -1,6 +1,8 @@
-import types from "../actions/type";
-import { fork, call, takeEvery } from "redux-saga/effects";
+import types,{API} from "../actions/type";
+import { put,fork, call, takeEvery } from "redux-saga/effects";
 import _super from "./super";
+import service from "../services";
+import Router from "next/router";
 function* request(actions) {
   try {
     switch (actions.api) {
@@ -34,10 +36,25 @@ function* clear(actions) {
   });
 }
 function* get(actions) {
-  const { item, doc, id, props } = actions;
+  const { item, doc, id, props ,mcs} = actions;
   try {
     yield call(_super.loading);
     switch (actions.doc) {
+      case 'ME':
+        try{
+            let response = yield call(service.post, 'service/get-user', {username:window.atob(localStorage.getItem("u"))});
+            yield put({
+              type: API[mcs][doc]["GET"]["SUCCESS"],
+              data: response.data,
+            });
+            if(response.data==null){
+              Router.push('/login');
+            }
+            return yield call(_super.complete);
+        }catch(e){
+            Router.push('/login');
+            return yield call(_super.complete);
+        }
       default:
         return yield call(_super.get, {
           item,
@@ -51,10 +68,29 @@ function* get(actions) {
   }
 }
 function* post(actions) {
-  const { item, doc, id, props } = actions;
+  const { item, doc, id, props,mcs } = actions;
+  const _loading = `loading_${doc.toLowerCase().replace(/-/g, "_")}`;
   try {
     yield call(_super.loading);
     switch (actions.doc) {
+      case 'API-AUTH-SIGNIN':
+        try{
+            let response = yield call(service.post, 'api/auth/signin', item);
+            let tkEncode = window.btoa(`${response.data?.type} ${response.data?.token}`);
+            localStorage.setItem("token",tkEncode);
+            localStorage.setItem("u",window.btoa(item.username));
+            yield put({
+              type: API[mcs][doc]["POST"]["SUCCESS"],
+              data: response.data,
+            });
+            yield call(_super.complete, _loading);
+            Router.push('/');
+            return ;
+        } catch (e) {
+            console.log(e);
+            yield call(_super.error, e.response?.data?.error ||e);
+            return yield call(_super.complete);
+        }
       default:
         return yield call(_super.post, {
           item,
@@ -64,6 +100,7 @@ function* post(actions) {
         });
     }
   } catch (e) {
+    console.log('test')
     return yield call(_super.error, e);
   }
 }
@@ -121,10 +158,26 @@ function* del(actions) {
   }
 }
 function* list(actions) {
-  const { item, doc, id, props } = actions;
+  const { item, doc, id, props,mcs } = actions;
+  const _loading = `loading_${doc.toLowerCase().replace(/-/g, "_")}`;
   try {
     yield call(_super.loading);
     switch (actions.doc) {
+      case 'PLACE':
+        try{
+          let response = yield call(service.post, 'service/search', item);
+          
+          console.log(response);
+          yield put({
+            type: API[mcs][doc]["LIST"]["SUCCESS"],
+            data: response.data.places||[],
+          });
+          return yield call(_super.complete, _loading);
+        }catch (e) {
+          console.log(e.response);
+          yield call(_super.error, e.response?.data?.error ||e);
+          return yield call(_super.complete)
+        }
       default:
         return yield call(_super.list, {
           item,

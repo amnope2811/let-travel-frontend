@@ -5,11 +5,10 @@ import SearchList from "./searchList";
 import SuggestList from "./suggestList";
 
 export default function SearchPage(props) {
-    const [searchValue, setSearchValue] = React.useState();
   return (
     <Main>
       <ComponentDidMount/>
-      <MainComponent setSearchValue={setSearchValue} />
+      <MainComponent />
     </Main>
   );
 }
