@@ -6,12 +6,12 @@ export default function SearchPad(props) {
 
   
   React.useEffect(()=>{
-    onSearch('');
+    onSearch('','PLACE');
   },[])
 
-  const onSearch = (e)=>{
+  const onSearch = (e,t)=>{
       props.action?.api?.clearPlace();
-      props.action.api.listPlace({place:e});
+      props.action.api.listPlace({q:e,type:t||'PLACE'});
   }
   return (
     <>

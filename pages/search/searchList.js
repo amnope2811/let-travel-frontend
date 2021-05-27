@@ -1,7 +1,7 @@
-import { Input,Typography,List,Skeleton,Button  } from "antd";
+import { Input,Typography,List,Skeleton,Button,Row,Col  } from "antd";
 import React from "react";
 const { Search } = Input;
-const { Text } = Typography;
+const { Text,Title } = Typography;
 const Item = List.Item;
 const Meta = Item.Meta;
 import Router from "next/router";
@@ -44,11 +44,17 @@ export default function SearchPad(props) {
         renderItem={item => (
           <Item key={item.id} style={{cursor:"pointer",padding:"26px"}} onClick={()=>clickList(item)}>
             <Skeleton avatar title={false} loading={loading} active>
-              <Meta
-                title={item.title}
-                description={item.description}
-              />
-              <div><Text code>{item.tag}</Text></div>
+              <Row gutter={16}>
+                <Col xs={14} sm={16} md={18}>
+                  <Title level={5}>{item.name}</Title>
+                </Col>
+                <Col style={{textAlign:"right"}} xs={10} sm={8} md={6}>
+                  <Text code>{item.tag}</Text>
+                </Col>
+                <Col span={24}>
+                  <Text>{item.description}</Text>
+                </Col>
+              </Row>
             </Skeleton>
           </Item>
         )}

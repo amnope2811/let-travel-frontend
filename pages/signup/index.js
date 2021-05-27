@@ -15,7 +15,6 @@ const styles={
 function SignUpPage(props) {
     const [role, setRole] = React.useState();
     const state ={role, setRole};
-    console.log(props)
 
     const { error} = props.reducer.component;
     React.useEffect(() => {
@@ -25,7 +24,7 @@ function SignUpPage(props) {
     }, [error]);
     
     return (
-        <MainComponent {...state}/>
+        <MainComponent {...state} {...props}/>
     );
 }
 

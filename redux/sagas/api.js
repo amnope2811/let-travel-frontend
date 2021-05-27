@@ -72,6 +72,7 @@ function* post(actions) {
   const _loading = `loading_${doc.toLowerCase().replace(/-/g, "_")}`;
   try {
     yield call(_super.loading);
+    console.log(actions.doc);
     switch (actions.doc) {
       case 'API-AUTH-SIGNIN':
         try{
@@ -91,6 +92,19 @@ function* post(actions) {
             yield call(_super.error, e.response?.data?.error ||e);
             return yield call(_super.complete);
         }
+      case 'SIGNUP':
+        try{
+            console.log(item);
+            let response = yield call(service.post, 'api/auth/signup', item);
+            yield put({
+              type: API[mcs][doc]["POST"]["SUCCESS"],
+              data: response.data,
+            });
+            return yield call(_super.complete, _loading);
+        } catch (e) {
+            yield call(_super.error, e.response?.data?.message ||e);
+            return yield call(_super.complete);
+        }
       default:
         return yield call(_super.post, {
           item,
@@ -100,7 +114,6 @@ function* post(actions) {
         });
     }
   } catch (e) {
-    console.log('test')
     return yield call(_super.error, e);
   }
 }

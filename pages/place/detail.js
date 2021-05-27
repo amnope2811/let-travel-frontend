@@ -4,7 +4,7 @@ const { Search } = Input;
 const { Title,Text,Link  } = Typography;
 let styles={
   price: {position:'absolute',right:'7%',fontWeight:'bold'},
-  card:{ backgroundColor:'#ffecec80',borderColor:'transparent'},
+  card:{ backgroundColor:'#f1f1f1c7',borderColor:'transparent'},
   location:{ color:'#ff4a08',padding:'6px' },
   rating:{ color:'#ffc800',padding:'1px'},
   currentprice:{fontSize:'20px',padding:'4px',color:'mediumspringgreen'},
@@ -35,7 +35,7 @@ export default function PageDetail(props) {
             <Text style={styles.currentprice}>{`฿ ${data.currentprice}`}</Text>
             {data.currentprice!=data.fullprice ? <Text style={styles.fullprice}>{data.fullprice}</Text>:null}
           </div>
-          <Title level={3}>{data.title}</Title>
+          <Title level={3}>{data.name}</Title>
           <div>
               <EnvironmentOutlined style={styles.location} />
               <Link href={`https://www.google.com/maps/search/${data.location}`} target="_blank" style={styles.location}>

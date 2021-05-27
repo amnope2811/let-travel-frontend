@@ -26,23 +26,26 @@ const initValue ={
 }
 
 export default function ReserveModal(props) {
-  const {reducer,data} = props;
+  const {reducer,data,action,setIsRenderModal} = props;
   const [form] = Form.useForm();
-  
+  const {me} = reducer.api;
+  const {place} = reducer.interact;
 
   const onConfirm =()=>{
     form.submit();
   }
 
   const onCancel =()=>{
-    props.setIsRenderModal(false);
+    setIsRenderModal(false);
   }
 
   const onFinish =()=>{
-    console.log('testtt');
     form.validateFields().then(v=>{
-      console.log(v);
-      props.setIsRenderModal(false);
+      v.date = v.date.format();
+      console.log({placeId:place?.item?.id,username:me?.user?.username,...v});
+      delete v.code;
+      // action.api.postBook({placeId:place?.item?.id,username:me?.user?.username,...v});
+      setIsRenderModal(false);
     })
   }
   return (
