@@ -85,7 +85,7 @@ export default function ReserveModal(props) {
             initialValues={initValue}
           >
             <Form.Item 
-              name={['number']} 
+              name={['ticket']} 
               label="Number of Tickers" 
               rules={[{ required: true, message: 'Please fill number of tickets' }]}
             >
