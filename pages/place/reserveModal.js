@@ -89,7 +89,7 @@ export default function ReserveModal(props) {
               label="Number of Tickers" 
               rules={[{ required: true, message: 'Please fill number of tickets' }]}
             >
-              <InputNumber size="large" min={1} max={10} defaultValue={1}/>
+              <InputNumber size="large" min={1} max={300} defaultValue={1}/>
             </Form.Item>
             <Form.Item 
               name={['date']} 
