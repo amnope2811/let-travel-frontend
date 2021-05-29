@@ -85,8 +85,8 @@ function* post(actions) {
             // Router.push('/');
             return yield call(_super.useInternalSaga, {api: "POST",doc:"API-AUTH-SIGNIN",item,id,props,service});
         } catch (e) {
-            console.log(e);
-            yield call(_super.error, e.response?.data?.error ||e);
+            console.log(e,e.response);
+            yield call(_super.error, e.response?.data?.message || e.response?.data?.error );
             return yield call(_super.complete);
         }
       case 'TWO-FACTOR':
@@ -104,7 +104,7 @@ function* post(actions) {
               return;
           } catch (e) {
               console.log(e);
-              yield call(_super.error, e.response?.data?.error ||e);
+              yield call(_super.error,e.response?.data?.message || e.response?.data?.error);
               return yield call(_super.complete);
           }
       case 'SIGNUP':
@@ -116,7 +116,7 @@ function* post(actions) {
             });
             return yield call(_super.complete, _loading);
         } catch (e) {
-            yield call(_super.error, e.response?.data?.message ||e);
+            yield call(_super.error, e.response?.data?.message || e.response?.data?.error);
             return yield call(_super.complete);
         }
       case 'BOOK':
@@ -128,7 +128,7 @@ function* post(actions) {
             });
             return yield call(_super.complete, _loading);
         } catch (e) {
-            yield call(_super.error, e.response?.data?.message ||e);
+            yield call(_super.error,e.response?.data?.message || e.response?.data?.error);
             return yield call(_super.complete);
         }
       default:
@@ -197,7 +197,7 @@ function* del(actions) {
             return yield call(_super.useInternalSaga, {api: "DEL",doc:"BOOK",item:item,id,props,service});
         } catch (e) {
             console.log(e);
-            yield call(_super.error, e.response?.data?.error ||e);
+            yield call(_super.error, e.response?.data?.message || e.response?.data?.error);
             return yield call(_super.complete);
         }
       default:
@@ -229,7 +229,7 @@ function* list(actions) {
           return yield call(_super.complete, _loading);
         }catch (e) {
           console.log(e.response);
-          yield call(_super.error, e.response?.data?.error ||e);
+          yield call(_super.error, e.response?.data?.message || e.response?.data?.error);
           return yield call(_super.complete)
         }
       default:
