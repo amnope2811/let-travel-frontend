@@ -75,7 +75,7 @@ export default function StylePlace(props) {
                         </>:
                         <Empty 
                             image={Empty.PRESENTED_IMAGE_SIMPLE} 
-                            description={<Title style={{color:"rgb(0 175 145 / 49%)"}} level={4}>Choose your're style</Title>} 
+                            description={<Title style={{color:"rgb(0 175 145 / 49%)"}} level={4}>Choose your style</Title>} 
                             style={{padding:'50px'}}
                         />
                     }

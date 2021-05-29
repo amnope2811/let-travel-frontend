@@ -1,5 +1,5 @@
 import React from "react";
-import { Button,Typography,Row,Col,Avatar,Space  } from "antd";
+import { Button,Typography,Row,Col,Avatar,Space,Tooltip  } from "antd";
 
 const {Title,Text,Link} = Typography;
 
@@ -35,15 +35,17 @@ export default function RoleSelected(props) {
         <Row gutter={24} style={styles.row}>
             <Col span={12} style={selected=="owner"?{...styles.colSelected,...styles.col}:styles.col}>
                 <Space direction="vertical">
-                    <Avatar 
-                        onClick={()=>selectRole('owner')} 
-                        style={selected=="owner"?
-                                {...styles.avatar,...styles.avaSelected}
-                                :styles.avatar
-                            } 
-                        size={64} 
-                        src={owner}
-                    />
+                    <Tooltip title="Coming soon, Do not available now.">
+                        <Avatar 
+                            // onClick={()=>selectRole('owner')} 
+                            style={selected=="owner"?
+                                    {...styles.avatar,...styles.avaSelected,cursor:'not-allowed'}
+                                    :{...styles.avatar,cursor:'not-allowed'}
+                                } 
+                            size={64} 
+                            src={owner}
+                        />
+                    </Tooltip>
                     <Text strong>Place Owner</Text>
                 </Space>
             </Col>

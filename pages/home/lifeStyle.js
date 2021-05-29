@@ -21,9 +21,9 @@ export default function LifeStyle(props) {
   return (
     <>
         <div style={{textAlign:"center",padding:'24px'}}>
-                <Text style={styles.text}>
+                <Title level={3} style={{color:'white'}}>
                   Choose your style
-                </Text>
+                </Title>
                 <div>
                     <Button 
                         onClick={()=>clickStyle('Shopping','ศูนย์การค้า')}

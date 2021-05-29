@@ -56,6 +56,30 @@ function* get(actions) {
             Router.push('/login');
             return yield call(_super.complete);
         }
+      case 'SUGGEST':
+        try{
+            let response = yield call(service.post, 'service/get-suggestion-place', item);
+            yield put({
+              type: API[mcs][doc]["GET"]["SUCCESS"],
+              data: response.data,
+            });
+            yield call(_super.complete);
+            return;
+        }catch(e){
+            return yield call(_super.complete);
+        }
+      case 'POPULAR':
+        try{
+            let response = yield call(service.post, 'service/get-popular-place', item);
+            yield put({
+              type: API[mcs][doc]["GET"]["SUCCESS"],
+              data: response.data,
+            });
+            yield call(_super.complete);
+            return;
+        }catch(e){
+            return yield call(_super.complete);
+        }
       default:
         return yield call(_super.get, {
           item,
