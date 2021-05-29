@@ -1,9 +1,9 @@
-import { Input,Typography,Card,Button } from "antd";
+import { Input,Typography,Card,Button,Row,Col } from "antd";
 import { EnvironmentOutlined, StarOutlined, StarFilled, StarTwoTone } from "@ant-design/icons";
 const { Search } = Input;
 const { Title,Text,Link  } = Typography;
 let styles={
-  price: {position:'absolute',right:'7%',fontWeight:'bold'},
+  price: {position:'absolute',right:'7%',fontWeight:'bold',top:"15px"},
   card:{ backgroundColor:'#f1f1f1c7',borderColor:'transparent'},
   location:{ color:'#ff4a08',padding:'6px' },
   rating:{ color:'#ffc800',padding:'1px'},
@@ -31,11 +31,12 @@ export default function PageDetail(props) {
     <>
       {data&&(
         <Card style={styles.card}>
+          <Row><Col sm={0} xs={24} style={{marginTop:'2.5vh'}}></Col></Row>
           <div style={styles.price}>
             <Text style={styles.currentprice}>{`฿ ${data.currentprice}`}</Text>
             {data.currentprice!=data.fullprice ? <Text style={styles.fullprice}>{data.fullprice}</Text>:null}
           </div>
-          <Title level={3}>{data.name}</Title>
+          <Title level={3} style={{width:'85%'}}>{data.name}</Title>
           <div>
               <EnvironmentOutlined style={styles.location} />
               <Link href={`https://www.google.com/maps/search/${data.location}`} target="_blank" style={styles.location}>

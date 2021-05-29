@@ -33,6 +33,11 @@ const initialState = {
       fullprice:400,
       currentprice:400
     }
+  ],
+  bookedList:[
+    {name:'Wat Arun',tickets:5,date:Date.now()},
+    {name:'Wat Pho',tickets:1,date:Date.now()},
+    {name:'Grand Palace',tickets:2,date:Date.now()},
   ]
 };
 import useNReduxReducer from "./super";

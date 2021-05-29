@@ -50,7 +50,8 @@ function* get(actions) {
             if(response.data==null){
               Router.push('/login');
             }
-            return yield call(_super.complete);
+            yield call(_super.complete);
+            return yield call(_super.useInternalSaga, {api: "GET",doc:"BOOK",item:response.data?.user?.places,id,props,service});
         }catch(e){
             Router.push('/login');
             return yield call(_super.complete);
@@ -72,30 +73,55 @@ function* post(actions) {
   const _loading = `loading_${doc.toLowerCase().replace(/-/g, "_")}`;
   try {
     yield call(_super.loading);
-    console.log(actions.doc);
     switch (actions.doc) {
       case 'API-AUTH-SIGNIN':
         try{
             let response = yield call(service.post, 'api/auth/signin', item);
-            let tkEncode = window.btoa(`${response.data?.type} ${response.data?.token}`);
-            localStorage.setItem("token",tkEncode);
-            localStorage.setItem("u",window.btoa(item.username));
             yield put({
               type: API[mcs][doc]["POST"]["SUCCESS"],
               data: response.data,
             });
             yield call(_super.complete, _loading);
-            Router.push('/');
-            return ;
+            // Router.push('/');
+            return yield call(_super.useInternalSaga, {api: "POST",doc:"API-AUTH-SIGNIN",item,id,props,service});
         } catch (e) {
             console.log(e);
             yield call(_super.error, e.response?.data?.error ||e);
             return yield call(_super.complete);
         }
+      case 'TWO-FACTOR':
+          try{
+              let response = yield call(service.post, 'api/auth/signin-2-factor', item);
+              let tkEncode = window.btoa(`${response.data?.type} ${response.data?.token}`);
+              localStorage.setItem("token",tkEncode);
+              localStorage.setItem("u",window.btoa(item.username));
+              yield put({
+                type: API[mcs][doc]["POST"]["SUCCESS"],
+                data: response.data,
+              });
+              yield call(_super.complete, _loading);
+              Router.push('/');
+              return;
+          } catch (e) {
+              console.log(e);
+              yield call(_super.error, e.response?.data?.error ||e);
+              return yield call(_super.complete);
+          }
       case 'SIGNUP':
         try{
-            console.log(item);
             let response = yield call(service.post, 'api/auth/signup', item);
+            yield put({
+              type: API[mcs][doc]["POST"]["SUCCESS"],
+              data: response.data,
+            });
+            return yield call(_super.complete, _loading);
+        } catch (e) {
+            yield call(_super.error, e.response?.data?.message ||e);
+            return yield call(_super.complete);
+        }
+      case 'BOOK':
+        try{
+            let response = yield call(service.post, 'service/book-place', item);
             yield put({
               type: API[mcs][doc]["POST"]["SUCCESS"],
               data: response.data,
@@ -159,6 +185,21 @@ function* del(actions) {
   try {
     yield call(_super.loading);
     switch (actions.doc) {
+      case 'BOOK':
+        try{
+            let response = yield call(service.delete, 'service/book-place', item);
+            yield put({
+              type: API[mcs][doc]["DEL"]["SUCCESS"],
+              data: response.data,
+            });
+            yield call(_super.complete, _loading);
+            console.log(id);
+            return yield call(_super.useInternalSaga, {api: "DEL",doc:"BOOK",item:item,id,props,service});
+        } catch (e) {
+            console.log(e);
+            yield call(_super.error, e.response?.data?.error ||e);
+            return yield call(_super.complete);
+        }
       default:
         return yield call(_super.del, {
           doc,

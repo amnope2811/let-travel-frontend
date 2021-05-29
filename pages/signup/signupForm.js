@@ -1,16 +1,13 @@
 import React from "react";
-import { Button,Typography,Card,Form,Input,message,Checkbox,Row,Col,Radio  } from "antd";
+import { Button,Typography,Form,Input,Row,Col,Radio  } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import {useEffect} from "react";
 import Router from "next/router";
 
 const {Title,Text,Link} = Typography;
 const styles={
-  main:{backgroundColor:"#cccccc"},
-  pad:{position:"absolute",width:"100%",textAlign:"-webkit-center",top:"22vh"},
-  card:{boxShadow:"0px 0px 20px #00af917d",width:"max-content"},
   title:{marginBottom:"2rem"},
-  form:{width:'340px',textAlign:'initial'},
+  form:{width:'320px',textAlign:'initial',maxWidth:'100%'},
   button:{width:'120px'}
 }
 const layout = {
@@ -158,7 +155,7 @@ export default function SignUpForm(props) {
                   iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                 />
             </Form.Item>
-            <Row gutter={16}>
+            <Row gutter={16} style={{justifyContent:'center'}}>
                 <Col>
                     <Form.Item style={{margin:'1rem auto'}}>
                         <Button style={styles.button} type="primary" onClick={onBack}>Back</Button>

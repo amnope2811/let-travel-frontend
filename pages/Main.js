@@ -29,9 +29,7 @@ function Main(props) {
     }
   }, [success]);
   React.useEffect(() => {
-    if(props.reducer?.api.me==null){
-      props.action?.api?.getMe();
-    }
+    props.action?.api?.getMe();
   }, []);
   return (
     <Navigator fullscreen={fullscreen} noLayout={noLayout} {...props}>

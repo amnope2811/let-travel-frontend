@@ -17,6 +17,7 @@ import { ApiFilled,HomeOutlined } from "@ant-design/icons";
 import * as React from "react";
 import getConfig from "next/config";
 const { Content, Sider, Header } = Layout;
+import traveller from 'images/traveller.png'
 function WebLayout({ router, fullscreen, t, ...props }) {
   const path = router.pathname;
   const _on_click_menu = (e) => {
@@ -47,22 +48,25 @@ function WebLayout({ router, fullscreen, t, ...props }) {
               defaultSelectedKeys={[path]}
             >
               <Menu.Item key="/"><HomeOutlined /></Menu.Item>
-              <Menu.Item key="/search">Explore</Menu.Item>
+              <Menu.Item key="/explore">Explore</Menu.Item>
+              <Menu.Item key="/booked">Booked</Menu.Item>
             </Menu>
           </Col>
-          <Col span={4}>
-            
-            <Menu
-              onClick={_on_click_user}
-              mode="horizontal"
-              defaultSelectedKeys={[path]}
-              style={{textAlign:'end'}}
-            >
-              <SubMenu key="sub1" icon={<Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>U</Avatar>}>
-                <Menu.Item key="signout">Sign out</Menu.Item>
-              </SubMenu>
-            </Menu>
-          </Col>
+          {props?.reducer?.api?.me?.user &&
+            <Col span={4}>
+              
+              <Menu
+                onClick={_on_click_user}
+                mode="horizontal"
+                defaultSelectedKeys={[path]}
+                style={{textAlign:'end'}}
+              >
+                <SubMenu key="sub1" icon={<Avatar src={traveller}/>}>
+                  <Menu.Item key="signout">Sign out</Menu.Item>
+                </SubMenu>
+              </Menu>
+            </Col>
+        }
         </Row>
         
       </Header>

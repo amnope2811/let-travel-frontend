@@ -1,18 +1,15 @@
 import React from "react";
-import { Button,Typography,Card,Form,Input,message,Checkbox  } from "antd";
+import { message,Spin  } from "antd";
 import Head from "next/head";
 import stylesheet from "styles/index.less";
 import { useNReduxDispatcher,useNReduxMapping } from "../nredux";
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { connect } from "react-redux";
 import {useEffect} from "react";
+import UsernameForm from "./login/username";
+import TwoFactorValidation from "./login/validation";
 
-const {Title,Text,Link} = Typography;
 const styles={
-  pad:{position:"absolute",width:"100%",textAlign:"-webkit-center",top:"22vh"},
-  card:{boxShadow:"0px 0px 20px #00af917d",width:"max-content"},
-  title:{marginBottom:"2rem"},
-  form:{width:'300px',textAlign:'initial'}
+  pad:{position:"absolute",width:"100%",textAlign:"-webkit-center",top:"22vh"}
 }
 const layout = {
   wrapperCol: {
@@ -33,15 +30,11 @@ function LogInPage(props) {
 
 function LogInComponent(props) {
     const { error} = props.reducer.component;
-    const {remember} = props.reducer?.interact;
-    console.log(remember);
+    const auth = props.reducer.interact["api-auth-signin"]
+    console.log(auth);
     useEffect(() => {
-      props?.action?.interact.getRemember();
+      props?.action.interact.clearApiAuthSignin();
     }, []);
-
-    useEffect(() => {
-      form.setFieldsValue(remember);
-    }, [remember]);
 
     useEffect(() => {
       if(error!=null) {
@@ -49,30 +42,6 @@ function LogInComponent(props) {
       }
     }, [error]);
 
-    const [form] = Form.useForm();
-    const validateMessages = {
-      required: '${label} is required!'
-    };
-    const onFinish =(e)=>{
-      form.validateFields().then(v=>{
-        if(v.remember){
-          props.action.interact.putRemember(v);
-        }else{
-          props.action.interact.deleteRemember();
-        }
-        delete v.remember;
-        props?.action?.api.postApiAuthSignin(v,null,props);
-      })
-    }
-
-    const signup=()=>{
-      props?.action?.api.postApiAuthSignup({
-        "username": "user011",
-        "email": "user@gmail.com",
-        "password": "user01",
-        "roles": ["user"]
-      });
-    }
   return (
     <>
     <Head>
@@ -91,48 +60,12 @@ function LogInComponent(props) {
           __html: stylesheet,
         }}
       />
-        <div style={styles.pad}>
 
-          <Card style={styles.card}>
-            <Title level={3} style={styles.title}>Let's Travel</Title>
-            <Form 
-              style={styles.form}
-              {...layout} 
-              form={form} 
-              name="nest-messages" 
-              onFinish={onFinish} 
-              validateMessages={validateMessages}
-              initialValues={remember}
-            >
-              <Form.Item 
-                name={['username']} 
-                rules={[{ required: true, message: 'Please fill username' }]}
-              >
-                <Input placeholder="username" size="large" />
-              </Form.Item>
-              <Form.Item 
-                name={['password']} 
-                rules={[{ required: true, message: 'Please fill password'  }]}
-              >
-                <Input.Password
-                  placeholder="password"
-                  size="large"
-                  iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                />
-              </Form.Item> 
-              <Form.Item name={['remember']} valuePropName="checked">
-                <Checkbox >Remember me</Checkbox>
-              </Form.Item>
-              <Form.Item style={{marginTop:'1rem',textAlign:'center'}}>
-                <Button type="primary" htmlType="submit" value="Login">Log in</Button>
-              </Form.Item>
-            </Form>
-            <Text >Don't have an account? 
-              <Link href="/signup" style={{marginLeft:"6px"}}>
-                  Sign up
-              </Link>
-            </Text >
-          </Card>
+        <div style={styles.pad}>
+          { auth? 
+            <TwoFactorValidation {...props}/>
+            :<UsernameForm {...props}/>
+          }
         </div>
     </>
   );

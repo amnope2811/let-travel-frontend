@@ -3,7 +3,6 @@ import React from "react";
 const { Search } = Input;
 const { Text,Title } = Typography;
 const Item = List.Item;
-const Meta = Item.Meta;
 import Router from "next/router";
 
 export default function SearchPad(props) {
@@ -39,7 +38,7 @@ export default function SearchPad(props) {
       <List
         style={{margin:"6px 0"}}
         itemLayout="horizontal"
-        loadMore={loadMore}
+        // loadMore={loadMore}
         dataSource={placeList}
         renderItem={item => (
           <Item key={item.id} style={{cursor:"pointer",padding:"26px"}} onClick={()=>clickList(item)}>

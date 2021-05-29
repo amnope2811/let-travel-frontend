@@ -42,9 +42,8 @@ export default function ReserveModal(props) {
   const onFinish =()=>{
     form.validateFields().then(v=>{
       v.date = v.date.format();
-      console.log({placeId:place?.item?.id,username:me?.user?.username,...v});
       delete v.code;
-      // action.api.postBook({placeId:place?.item?.id,username:me?.user?.username,...v});
+      action.api.postBook({placeId:place?.item?.id,username:me?.user?.username,...v});
       setIsRenderModal(false);
     })
   }

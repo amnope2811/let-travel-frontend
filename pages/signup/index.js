@@ -7,11 +7,6 @@ import { connect } from "react-redux";
 import Head from "next/head";
 import stylesheet from "styles/index.less";
 
-const styles={
-    pad:{position:"absolute",width:"100%",textAlign:"-webkit-center",top:"22vh"},
-    card:{boxShadow:"0px 0px 20px #00af917d",width:"max-content"}
-}
-
 function SignUpPage(props) {
     const [role, setRole] = React.useState();
     const state ={role, setRole};
@@ -29,6 +24,10 @@ function SignUpPage(props) {
 }
 
 function MainComponent(props) {
+  const styles={
+    pad:{position:"absolute",width:"100%",textAlign:"-webkit-center",top:props.role?"0.1vh":"20vh"},
+    card:{boxShadow:"0px 0px 20px #00af917d",width:"max-content"}
+  }
   return (
     <>
       <Head>

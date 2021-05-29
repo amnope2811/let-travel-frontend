@@ -161,7 +161,7 @@ function* del({ doc, uri, id, context, mcs }) {
       data: response.data,
     });
     yield call(success, _loading);
-    return history.back();
+    // return history.back();
   } catch (e) {
     yield call(error, e?.response?.request?.responseText);
     yield call(complete);

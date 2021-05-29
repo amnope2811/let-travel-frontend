@@ -24,7 +24,7 @@ function MainComponent(props) {
   
   useEffect(()=>{
     if(data==null){
-      Router.push('/search');
+      Router.push('/explore');
     }
   },[])
 

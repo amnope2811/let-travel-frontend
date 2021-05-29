@@ -40,12 +40,11 @@ function* clear(actions) {
 function* get(actions) {
   const { doc, item, id, props, service } = actions;
   try {
+    console.log(actions);
     switch (actions.doc) {
       case 'REMEMBER':
         let remember =JSON.parse(localStorage.getItem("r"));
         if(remember){
-          
-          console.log(remember,typeof window.atob(remember));
           remember = JSON.parse(window.atob(remember));
           remember.username = window.atob(remember.username);
           remember.password = window.atob(remember.password);
