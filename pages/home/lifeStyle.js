@@ -4,7 +4,7 @@ const { Title,Text } = Typography;
 import React from "react";
 import Router from "next/router";
 const styles = {
-    button:{backgroundColor:"transparent",boxShadow:"unset",margin:'12px',width:'100px'},
+    button:{backgroundColor:"transparent",boxShadow:"unset",margin:'12px',minWidth:'100px'},
     text:{display:'block',color:"white",fontSize:'16px'}
 }
 export default function LifeStyle(props) {
@@ -21,7 +21,6 @@ export default function LifeStyle(props) {
   return (
     <>
         <div style={{textAlign:"center",padding:'24px'}}>
-                {/* <Title style={styles.text} level={3}>Let's Travel</Title> */}
                 <Text style={styles.text}>
                   Choose your style
                 </Text>

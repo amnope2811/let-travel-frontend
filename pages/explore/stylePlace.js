@@ -9,7 +9,7 @@ const Item = List.Item;
 let styles={
     button:{backgroundColor:"transparent",boxShadow:"unset",width:'100px'},
     inline:{display:"inline-block",margin:'12px auto'},
-    block:{display:"block",margin:'28px 0'},
+    block:{display:"block",marginTop:'32px'},
     text:{display:'block',color:"rgba(0, 175, 145, 0.49)"},
     selected:{transform:"scale(1.4)"}
 }

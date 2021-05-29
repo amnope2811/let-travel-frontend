@@ -181,7 +181,7 @@ function* patch(actions) {
 }
 
 function* del(actions) {
-  const { item,id, doc, props } = actions;
+  const { item,id, doc, props,mcs } = actions;
   try {
     yield call(_super.loading);
     switch (actions.doc) {
@@ -193,7 +193,7 @@ function* del(actions) {
               type: API[mcs][doc]["DEL"]["SUCCESS"],
               data: response.data,
             });
-            yield call(_super.complete, _loading);
+            yield call(_super.complete);
             console.log(id);
             return yield call(_super.useInternalSaga, {api: "DEL",doc:"BOOK",id,props,service});
         } catch (e) {
