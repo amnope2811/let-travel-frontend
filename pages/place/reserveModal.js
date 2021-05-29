@@ -1,5 +1,5 @@
 import React from "react";
-import { Input,Typography,Button,Modal,DatePicker,Form,InputNumber } from "antd";
+import { Input,Typography,Button,Modal,DatePicker,Form,InputNumber,message } from "antd";
 import moment from 'moment';
 
 const layout = {
@@ -28,8 +28,14 @@ const initValue ={
 export default function ReserveModal(props) {
   const {reducer,data,action,setIsRenderModal} = props;
   const [form] = Form.useForm();
-  const {me} = reducer.api;
+  const {me,book} = reducer.api;
   const {place} = reducer.interact;
+
+  React.useEffect(()=>{
+    if(place?.message){
+      message.success(place.message);
+    }
+  },[place])
 
   const onConfirm =()=>{
     form.submit();

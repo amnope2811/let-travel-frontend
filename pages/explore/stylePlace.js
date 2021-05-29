@@ -23,7 +23,7 @@ export default function StylePlace(props) {
   React.useEffect(() => {
     action.api?.clearPlace();
     action.interact?.clearSearch();
-    action.api.listPlace({q:keyword,type:'TAG'});
+    action.api.listPlace({q:keyword||'',type:'TAG'});
   },[keyword]);
 
   const clickList=(e)=>{

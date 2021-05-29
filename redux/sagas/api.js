@@ -181,20 +181,21 @@ function* patch(actions) {
 }
 
 function* del(actions) {
-  const { id, doc, props } = actions;
+  const { item,id, doc, props } = actions;
   try {
     yield call(_super.loading);
     switch (actions.doc) {
       case 'BOOK':
         try{
-            let response = yield call(service.delete, 'service/book-place', item);
+          console.log(id);
+            let response = yield call(service.delete, `service/book-place?placeId=${item.placeId||''}&username=${item.username||''}`);
             yield put({
               type: API[mcs][doc]["DEL"]["SUCCESS"],
               data: response.data,
             });
             yield call(_super.complete, _loading);
             console.log(id);
-            return yield call(_super.useInternalSaga, {api: "DEL",doc:"BOOK",item:item,id,props,service});
+            return yield call(_super.useInternalSaga, {api: "DEL",doc:"BOOK",id,props,service});
         } catch (e) {
             console.log(e);
             yield call(_super.error, e.response?.data?.message || e.response?.data?.error);

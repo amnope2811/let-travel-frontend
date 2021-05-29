@@ -1,6 +1,6 @@
 import React from "react";
 import Main from "../Main";
-import SearchPad from "./searchpad";
+import SearchPad from "./searchPad";
 import SearchList from "./searchList";
 
 export default function SearchPage(props) {

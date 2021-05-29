@@ -21,11 +21,13 @@ function MainComponent(props) {
     }
   return (
     <>
-        <div className="home-background" style={{height:"100%"}}>
+        <div className="home-background" style={{height:"100%",minHeight:'500px'}}>
             <div style={{position:"absolute",width:"100%",bottom:"25px",textAlign:"center" }}>
-                <Title className="hover-scale" level={5} onClick={route} style={{color:"white",cursor:"pointer"}}>
+              <Button onClick={route} type="primary" size="medium">
+                <Title level={5} style={{color:"white"}}>
                   Get Started
                 </Title>
+              </Button>
             </div>
             <LifeStyle {...props}/>
         </div>

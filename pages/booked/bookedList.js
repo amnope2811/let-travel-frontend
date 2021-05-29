@@ -47,7 +47,8 @@ export default function BookListPage(props) {
     },{});
 
     const removeBooked=(e)=>{
-        action?.api?.deleteBook({placeId:'',username:reducer.api.me.user?.username},'test');
+        console.log(action);
+        action?.api?.deleteBook({placeId:e.id,username:reducer.api.me.user?.username});
     }
   return (
     <>
@@ -63,7 +64,7 @@ export default function BookListPage(props) {
                                 {
                                     (bookedList[item]?.list||[]).map(v=>{
                                         return (
-                                            <Col sm={12} xs={24} key={v.name}>
+                                            <Col md={12} sm={24} xs={24} key={v.name}>
                                                 <div  style={{margin:"0 12px 18px",padding:"0px"}}>
                                                     <Card 
                                                         style={
@@ -75,18 +76,18 @@ export default function BookListPage(props) {
                                                             }
                                                     >
                                                         <Row gutter={24}>
-                                                            <Col md={6} sm={8} xs={6} style={{borderRight:"1px solid gray"}}>
+                                                            <Col md={6} sm={8} xs={7} style={{borderRight:"1px solid gray"}}>
                                                                 <Text style={{...styles.text,...styles.day}}>{moment(v.date).format('DD')}</Text>
                                                                 <Text style={{...styles.text,...styles.date}}>{moment(v.date).format('dddd')}</Text>
                                                             </Col>
-                                                            <Col md={15} sm={12} xs={14} style={{textAlign:'left',paddingLeft:'32px'}}>
+                                                            <Col md={15} sm={12} xs={13} style={{textAlign:'left',paddingLeft:'32px'}}>
                                                                 <Text style={{...styles.text,...styles.name}}>{v.name}</Text>
                                                                 <Text style={{...styles.text,...styles.time}}>{moment(v.date).format('HH.mm A')}</Text>
                                                                 <Text style={{...styles.text,...styles.tickets}}>Tickets: {v.tickets}</Text>
                                                             </Col>
                                                             <Col md={3} sm={4} xs={4} style={{textAlign:'center'}}>
                                                                 <Button 
-                                                                    onClick={removeBooked}
+                                                                    onClick={()=>removeBooked(v)}
                                                                     style={styles.deleted}
                                                                     size="large"
                                                                     danger 

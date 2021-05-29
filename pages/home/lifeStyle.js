@@ -5,7 +5,7 @@ import React from "react";
 import Router from "next/router";
 const styles = {
     button:{backgroundColor:"transparent",boxShadow:"unset",margin:'12px',width:'100px'},
-    text:{display:'block',color:"white"}
+    text:{display:'block',color:"white",fontSize:'16px'}
 }
 export default function LifeStyle(props) {
     const {action,reducer} = props;
@@ -23,7 +23,7 @@ export default function LifeStyle(props) {
         <div style={{textAlign:"center",padding:'24px'}}>
                 {/* <Title style={styles.text} level={3}>Let's Travel</Title> */}
                 <Text style={styles.text}>
-                  Choose your're style
+                  Choose your style
                 </Text>
                 <div>
                     <Button 
