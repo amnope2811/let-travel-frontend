@@ -31,7 +31,7 @@ function MainComponent(props) {
   useEffect(()=>{
     props.setData(data);
   },[data])
-  // let data = (props?.reducer?.interact?.placeList||[]).find(v=>v.id==router?.query?.id);
+
   return (
     <>
       {data&&(

@@ -28,14 +28,10 @@ const initValue ={
 export default function ReserveModal(props) {
   const {reducer,data,action,setIsRenderModal} = props;
   const [form] = Form.useForm();
-  const {me,book} = reducer.api;
+  const {me} = reducer.api;
   const {place} = reducer.interact;
-
-  React.useEffect(()=>{
-    if(place?.message){
-      message.success(place.message);
-    }
-  },[place])
+  const successMessage = reducer.interact['success-message'];
+  const [isFirst,setIsFirst] = React.useState(true);
 
   const onConfirm =()=>{
     form.submit();
@@ -44,6 +40,16 @@ export default function ReserveModal(props) {
   const onCancel =()=>{
     setIsRenderModal(false);
   }
+
+  React.useEffect(()=>{
+      if(successMessage?.message&&!isFirst){
+        message.success(successMessage.message);
+      }else{
+        console.log('test');
+        props.action.interact?.clearSuccessMessage();
+        setIsFirst(false);
+      }
+  },[successMessage])
 
   const onFinish =()=>{
     form.validateFields().then(v=>{

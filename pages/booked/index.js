@@ -17,22 +17,7 @@ function ComponentDidMount({ action, reducer}) {
   return <></>;
 }
 function MainComponent(props) {
-  
-  const { error} = props.reducer.component;
-  const {book} = props?.reducer?.api;
 
-  React.useEffect(()=>{
-      if(book?.message){
-       message.success(book.message);
-      }
-  },[book])
-
-
-  React.useEffect(() => {
-      if(error!=null) {
-        message.error(error);
-      }
-  }, [error]);
   return (
     <>
       <BookedListPage {...props}/>

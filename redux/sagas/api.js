@@ -150,7 +150,8 @@ function* post(actions) {
               type: API[mcs][doc]["POST"]["SUCCESS"],
               data: response.data,
             });
-            return yield call(_super.complete, _loading);
+            yield call(_super.complete, _loading);
+            return yield call(_super.useInternalSaga, {api: "PUT",doc:"SUCCESS-MESSAGE",item:response.data,id,props,service});
         } catch (e) {
             yield call(_super.error,e.response?.data?.message || e.response?.data?.error);
             return yield call(_super.complete);
@@ -218,6 +219,7 @@ function* del(actions) {
               data: response.data,
             });
             yield call(_super.complete);
+            yield call(_super.useInternalSaga, {api: "PUT",doc:"SUCCESS-MESSAGE",item:response.data,id,props,service});
             return yield call(props.getMe, {api: "GET",doc:"ME",item,id,props,service});
         } catch (e) {
             console.log(e);
