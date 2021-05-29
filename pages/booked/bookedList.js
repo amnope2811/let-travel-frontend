@@ -115,7 +115,7 @@ export default function BookListPage(props) {
                                                             <Col md={15} sm={12} xs={13} style={{textAlign:'left',paddingLeft:'32px'}}>
                                                                 <Text style={{...styles.text,...styles.name}}>{v.name}</Text>
                                                                 <Text style={{...styles.text,...styles.time}}>{moment(v.date).format('HH.mm A')}</Text>
-                                                                <Text style={{...styles.text,...styles.tickets}}>Tickets: {v.tickets}</Text>
+                                                                <Text style={{...styles.text,...styles.tickets}}>Tickets: {v.ticket}</Text>
                                                             </Col>
                                                             <Col md={3} sm={4} xs={4} style={{textAlign:'center'}}>
                                                                 <Button 
