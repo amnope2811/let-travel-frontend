@@ -48,7 +48,7 @@ export default function BookListPage(props) {
 
     const removeBooked=(e)=>{
         console.log(action);
-        action?.api?.deleteBook({placeId:e.id,username:reducer.api.me.user?.username});
+        action?.api?.deleteBook({placeId:e.id,username:reducer.api.me.user?.username},null,action.api);
     }
   return (
     <>

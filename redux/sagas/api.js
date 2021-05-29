@@ -194,8 +194,7 @@ function* del(actions) {
               data: response.data,
             });
             yield call(_super.complete);
-            console.log(id);
-            return yield call(_super.useInternalSaga, {api: "DEL",doc:"BOOK",id,props,service});
+            return yield call(props.getMe, {api: "GET",doc:"ME",item,id,props,service});
         } catch (e) {
             console.log(e);
             yield call(_super.error, e.response?.data?.message || e.response?.data?.error);
