@@ -35,7 +35,7 @@ function MainComponent(props) {
   return (
     <>
       {data&&(
-        <div className="set-image-background" style={{backgroundImage:`url(${process.env.BACKEND_URI}${data.img?.imagePath})`}}>
+        <div className="set-image-background" style={{backgroundImage:`url(http://150.95.30.29:8081${data.img?.imagePath})`}}>
           <PlaceDetail {...props}/>
           <ReserveModal {...props}/>
         </div>

@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_ROOT = process.env.BACKEND_URI;
+const API_ROOT = 'http://150.95.30.29:8081';
 const headers = () => ({});
 const agent = token => {
   let tkEncode = localStorage.getItem("token");
