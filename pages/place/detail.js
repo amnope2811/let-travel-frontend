@@ -7,7 +7,7 @@ let styles={
   card:{ backgroundColor:'#f1f1f1c7',borderColor:'transparent'},
   location:{ color:'#ff4a08',padding:'6px' },
   rating:{ color:'#ffc800',padding:'1px'},
-  currentprice:{fontSize:'20px',padding:'4px',color:'#fa2300'},
+  currentprice:{fontSize:'20px',padding:'4px',color:'#f92604'},
   fullprice:{textDecoration:'line-through',fontSize:'16px',padding:'4px',color:'darkorange'},
   description:{margin:'18px 0'}
 }
